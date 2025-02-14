@@ -191,11 +191,12 @@ typedef void (^RMStoreSuccessBlock)();
            success:(void (^)(SKPaymentTransaction *transaction))successBlock
            failure:(void (^)(SKPaymentTransaction *transaction, NSError *error))failureBlock
 {
-    [self addPayment:productIdentifier user:nil success:successBlock failure:failureBlock];
+    [self addPayment:productIdentifier user:nil count:1 success:successBlock failure:failureBlock];
 }
 
 - (void)addPayment:(NSString*)productIdentifier
               user:(NSString*)userIdentifier
+             count:(NSInteger)count
            success:(void (^)(SKPaymentTransaction *transaction))successBlock
            failure:(void (^)(SKPaymentTransaction *transaction, NSError *error))failureBlock
 {
@@ -211,6 +212,7 @@ typedef void (^RMStoreSuccessBlock)();
         return;
     }
     SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:product];
+    payment.quantity = count;
     if ([payment respondsToSelector:@selector(setApplicationUsername:)])
     {
         payment.applicationUsername = userIdentifier;

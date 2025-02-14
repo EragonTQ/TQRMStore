@@ -75,6 +75,7 @@ extern NSInteger const RMStoreErrorCodeUnableToCompleteVerification;
  */
 - (void)addPayment:(NSString*)productIdentifier
               user:(NSString*)userIdentifier
+             count:(NSInteger)count
            success:(void (^)(SKPaymentTransaction *transaction))successBlock
            failure:(void (^)(SKPaymentTransaction *transaction, NSError *error))failureBlock __attribute__((availability(ios,introduced=7.0)));
 
